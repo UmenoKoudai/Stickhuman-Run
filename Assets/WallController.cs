@@ -10,6 +10,7 @@ public class WallController : MonoBehaviour
     GameObject _gameManager;
     Rigidbody2D _rb;
     public int _moveSpeed = 1;
+    bool _reset = false; 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -18,6 +19,8 @@ public class WallController : MonoBehaviour
 
     void Update()
     {
+        var GM = _gameManager.GetComponent<GameManager>();
+        _moveSpeed = GM._moveSpeed;
         _rb.velocity = Vector2.left * _moveSpeed;
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -26,7 +29,8 @@ public class WallController : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Destroy(gameObject);
-            GM._moveSpeed = 1;
+            _reset = true;
+            GM._reset = _reset;
         }
     }
 }

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     float _count;
     void Start()
     {
-        _wallController = GameObject.Find("WallCreate");
+        
     }
 
     void Update()
@@ -31,8 +31,6 @@ public class GameManager : MonoBehaviour
     }
     void SpeedUp()
     {
-        var wallController = _wallController.GetComponent<WallController>();
         _moveSpeed++;
-        wallController._moveSpeed = _moveSpeed;
     }
 }
