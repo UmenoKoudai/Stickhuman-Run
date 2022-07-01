@@ -22,6 +22,10 @@ public class WallController : MonoBehaviour
         var GM = _gameManager.GetComponent<GameManager>();
         _moveSpeed = GM._moveSpeed;
         _rb.velocity = Vector2.left * _moveSpeed;
+        if(transform.position.x <= -12f)
+        {
+            Destroy(gameObject);
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
