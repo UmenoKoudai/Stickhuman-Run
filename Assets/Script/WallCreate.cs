@@ -12,6 +12,7 @@ public class WallCreate : MonoBehaviour
     GameObject _gameManager;
     float _time;
     float _intarval;
+    int n;
     void Start()
     {
         _gameManager = GameObject.Find("GameManager");
@@ -20,10 +21,29 @@ public class WallCreate : MonoBehaviour
     void Update()
     {
         _time += Time.deltaTime;
-        int n = Random.Range(0, 2);
+        n = Random.Range(0, 2);
         var DM = _gameManager.GetComponent<GameManager>();
         _intarval = DM._intarval;
-        if (_time > _intarval)
+        if (_intarval >= 0.35f)
+        {
+            IntarvalDown(_intarval);
+        }
+        else
+        {
+            MaxIntarval();
+        }
+    }
+    void IntarvalDown(float intarval)
+    {
+        if (_time > intarval)
+        {
+            Instantiate(_wall, _wallPosition[n], transform.rotation);
+            _time = 0;
+        }
+    }
+    void MaxIntarval()
+    {
+        if (_time > 0.35f)
         {
             Instantiate(_wall, _wallPosition[n], transform.rotation);
             _time = 0;

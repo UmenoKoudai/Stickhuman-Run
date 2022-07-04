@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Text _timerText;
     [SerializeField] Text _distance;
+    [SerializeField] Text _hiscoer;
+    [SerializeField] Text _thisTimeDistance;
     [SerializeField] GameTime _gameTime = GameTime.Normal;
     [SerializeField] GameObject _result;
     int _moveDistance;
@@ -23,9 +25,11 @@ public class GameManager : MonoBehaviour
     public float _intarval = 2f;
     float _timer;
     float _count;
+    scoredata sco2 = new scoredata();
     void Start()
     {
-        
+        sco2 = OnLoad();
+        _bestDistance = sco2._score;
     }
 
     void Update()
@@ -33,7 +37,7 @@ public class GameManager : MonoBehaviour
         _timer += Time.deltaTime;
         _count += Time.deltaTime;
         float time = 60 - _timer;
-        if(_gameTime == GameTime.Normal)
+        if (_gameTime == GameTime.Normal)
         {
             _timerText.text = $"TIME:{time.ToString("f2")}";
             _distance.text = $"移動距離:{_moveDistance.ToString("000")}m";
@@ -51,7 +55,11 @@ public class GameManager : MonoBehaviour
             }
             if(_bestDistance <= _moveDistance)
             {
+                sco2._score = _bestDistance;
+                OnSave(sco2);
                 _bestDistance = _moveDistance;
+                _hiscoer.text = $"ベスト{_bestDistance.ToString("000")}m";
+
             }
         }
         if(_gameTime == GameTime.Time0)
@@ -62,8 +70,10 @@ public class GameManager : MonoBehaviour
         }
         if(time <= 0)
         {
+            _thisTimeDistance.text = $"スコア{_moveDistance.ToString("000")}m";
             _gameTime = GameTime.Time0;
             _result.gameObject.SetActive(true);
+            
         }
         
     }
@@ -77,7 +87,7 @@ public class GameManager : MonoBehaviour
     {
         StreamWriter writer;
         string json = JsonUtility.ToJson(sco);
-        writer = new StreamWriter(Application.persistentDataPath + "/.json");
+        writer = new StreamWriter(Application.persistentDataPath + "/savedata.json");
         writer.Write(json);
         writer.Flush();
         writer.Close();
@@ -85,8 +95,9 @@ public class GameManager : MonoBehaviour
     public scoredata OnLoad()
     {
         string datastr = "";
-        StringReader reader;
-        reader = new StringReader(Application.persistentDataPath + "/.json");
+        StreamReader reader;
+        reader = new StreamReader(Application.persistentDataPath + "/savedata.json");
+        datastr = reader.ReadToEnd();
         reader.Close();
         return JsonUtility.FromJson<scoredata>(datastr);
     }

@@ -21,7 +21,14 @@ public class WallController : MonoBehaviour
     {
         var GM = _gameManager.GetComponent<GameManager>();
         _moveSpeed = GM._moveSpeed;
-        _rb.velocity = Vector2.left * _moveSpeed;
+        if(_moveSpeed <= 25)
+        {
+            PlateMove(_moveSpeed);
+        }
+        else if(_moveSpeed > 25)
+        {
+            MaxSpeed();
+        }
         if(transform.position.x <= -12f)
         {
             Destroy(gameObject);
@@ -36,5 +43,13 @@ public class WallController : MonoBehaviour
             _reset = true;
             GM._reset = _reset;
         }
+    }
+    void PlateMove(int moveSpeed)
+    {
+        _rb.velocity = Vector2.left * moveSpeed;
+    }
+    void MaxSpeed()
+    {
+        _rb.velocity = Vector2.left * 25;
     }
 }
