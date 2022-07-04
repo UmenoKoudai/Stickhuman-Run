@@ -7,10 +7,17 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
+    public class scoredata
+    {
+        public int _score;
+    }
+
     [SerializeField] Text _timerText;
     [SerializeField] Text _distance;
-    GameTime _gameTime = GameTime.Normal;
+    [SerializeField] GameTime _gameTime = GameTime.Normal;
+    [SerializeField] GameObject _result;
     int _moveDistance;
+    int _bestDistance;
     public int _moveSpeed;
     public bool _reset = false;
     public float _intarval = 2f;
@@ -42,6 +49,10 @@ public class GameManager : MonoBehaviour
                 _intarval = 2f;
                 _reset = false;
             }
+            if(_bestDistance <= _moveDistance)
+            {
+                _bestDistance = _moveDistance;
+            }
         }
         if(_gameTime == GameTime.Time0)
         {
@@ -52,13 +63,32 @@ public class GameManager : MonoBehaviour
         if(time <= 0)
         {
             _gameTime = GameTime.Time0;
+            _result.gameObject.SetActive(true);
         }
         
     }
     void SpeedUp()
     {
         _moveSpeed++;
-        _intarval -= 0.05f;
+        _intarval -= 0.07f;
+    }
+
+    public void OnSave(scoredata sco)
+    {
+        StreamWriter writer;
+        string json = JsonUtility.ToJson(sco);
+        writer = new StreamWriter(Application.persistentDataPath + "/.json");
+        writer.Write(json);
+        writer.Flush();
+        writer.Close();
+    }
+    public scoredata OnLoad()
+    {
+        string datastr = "";
+        StringReader reader;
+        reader = new StringReader(Application.persistentDataPath + "/.json");
+        reader.Close();
+        return JsonUtility.FromJson<scoredata>(datastr);
     }
 }
 enum GameTime
