@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
         {
             _timerText.text = $"TIME:{time.ToString("f2")}";
             _distance.text = $"移動距離:{_moveDistance.ToString("000")}m";
+            _hiscoer.text = $"ベスト{_bestDistance.ToString("000")}m";
             if (_count >= 1)
             {
                 SpeedUp();
@@ -54,11 +55,10 @@ public class GameManager : MonoBehaviour
                 _reset = false;
             }
             if(_bestDistance <= _moveDistance)
-            {
+            {  
+                _bestDistance = _moveDistance;
                 sco2._score = _bestDistance;
                 OnSave(sco2);
-                _bestDistance = _moveDistance;
-                _hiscoer.text = $"ベスト{_bestDistance.ToString("000")}m";
 
             }
         }
@@ -85,21 +85,32 @@ public class GameManager : MonoBehaviour
 
     public void OnSave(scoredata sco)
     {
-        StreamWriter writer;
-        string json = JsonUtility.ToJson(sco);
-        writer = new StreamWriter(Application.persistentDataPath + "/savedata.json");
-        writer.Write(json);
-        writer.Flush();
-        writer.Close();
+        using (StreamWriter writer = new StreamWriter(Application.persistentDataPath + "/savedata.json"))
+        {
+            string json = JsonUtility.ToJson(sco);
+            writer.Write(json);
+            writer.Flush();
+            writer.Close();
+        }
     }
     public scoredata OnLoad()
     {
-        string datastr = "";
-        StreamReader reader;
-        reader = new StreamReader(Application.persistentDataPath + "/savedata.json");
-        datastr = reader.ReadToEnd();
-        reader.Close();
-        return JsonUtility.FromJson<scoredata>(datastr);
+        try
+        {
+            using (StreamReader reader = new StreamReader(Application.persistentDataPath + "/savedata.json"))
+            {
+                string datastr = "";
+                datastr = reader.ReadLine();
+                reader.Close();
+                return JsonUtility.FromJson<scoredata>(datastr);
+            }
+        }
+        catch
+        {
+            Debug.LogWarning("データがありません");
+            return null;
+        }
+
     }
 }
 enum GameTime

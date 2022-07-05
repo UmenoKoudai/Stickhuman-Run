@@ -10,6 +10,7 @@ public class WallController : MonoBehaviour
     GameObject _gameManager;
     Rigidbody2D _rb;
     public int _moveSpeed = 1;
+    int _maxSpeed = 26;
     bool _reset = false; 
     void Start()
     {
@@ -21,11 +22,11 @@ public class WallController : MonoBehaviour
     {
         var GM = _gameManager.GetComponent<GameManager>();
         _moveSpeed = GM._moveSpeed;
-        if(_moveSpeed <= 25)
+        if(_moveSpeed <= _maxSpeed)
         {
             PlateMove(_moveSpeed);
         }
-        else if(_moveSpeed > 25)
+        else if(_moveSpeed > _maxSpeed)
         {
             MaxSpeed();
         }
@@ -50,6 +51,6 @@ public class WallController : MonoBehaviour
     }
     void MaxSpeed()
     {
-        _rb.velocity = Vector2.left * 25;
+        _rb.velocity = Vector2.left * _maxSpeed;
     }
 }
