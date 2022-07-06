@@ -7,14 +7,16 @@ using System.IO;
 
 public class BackGroundMove : MonoBehaviour
 {
-    [SerializeField] float _changPosition;
+    [SerializeField] float _changPosition = -6f;
     GameObject _gameManager;
     GameObject bGbefore;
     GameObject bGafter;
     int _moveSpeed;
+    Vector3 _position;
     void Start()
     {
         _gameManager = GameObject.Find("GameManager");
+        _position = transform.position;
     }
 
     void Update()
@@ -24,8 +26,9 @@ public class BackGroundMove : MonoBehaviour
         transform.Translate(Vector2.left * _moveSpeed * Time.deltaTime);
         if(transform.position.x <= _changPosition)
         {
-            bGbefore.SetActive(false);
-            bGafter.SetActive(true);
+            transform.position = _position;
+            //bGbefore.SetActive(false);
+            //bGafter.SetActive(true);
         }
     }
 }
