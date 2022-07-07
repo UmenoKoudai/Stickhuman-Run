@@ -8,6 +8,7 @@ using System.IO;
 public class BackGroundMove : MonoBehaviour
 {
     [SerializeField] float _changPosition = -6f;
+    [SerializeField] GameObject _backGround;
     GameObject _gameManager;
     GameObject bGbefore;
     GameObject bGafter;
@@ -26,7 +27,9 @@ public class BackGroundMove : MonoBehaviour
         transform.Translate(Vector2.left * _moveSpeed * Time.deltaTime);
         if(transform.position.x <= _changPosition)
         {
-            transform.position = _position;
+            //transform.position = _position;
+            Instantiate(_backGround, _position, transform.rotation);
+            Destroy(gameObject);
             //bGbefore.SetActive(false);
             //bGafter.SetActive(true);
         }
