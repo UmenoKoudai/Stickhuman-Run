@@ -9,9 +9,17 @@ public class SceneMove : MonoBehaviour
 {
     [SerializeField] GameObject _close;
     [SerializeField] GameObject _open;
+    GameObject _anim;
+
+    private void Start()
+    {
+        _anim = GameObject.Find("DoorPosition");
+    }
+
+
     public void GameStart(string scneName)
     {
-        SceneManager.LoadScene(scneName);
+        StartCoroutine(GS(scneName));
     }
     public void Title(string scneName)
     {
@@ -22,4 +30,13 @@ public class SceneMove : MonoBehaviour
         _close.SetActive(false);
         _open.SetActive(true);
     }
+    IEnumerator GS(string scneName)
+    {
+        var Anim = _anim.GetComponent<Animator>();
+        Anim.Play("DoorOpen");
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(scneName);
+    }
 }
+
+

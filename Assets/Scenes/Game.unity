@@ -767,7 +767,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 920191937}
         m_TargetAssemblyTypeName: SceneMove, Assembly-CSharp
-        m_MethodName: GameStart
+        m_MethodName: Title
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
