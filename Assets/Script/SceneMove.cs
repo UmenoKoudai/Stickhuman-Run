@@ -10,6 +10,7 @@ public class SceneMove : MonoBehaviour
     [SerializeField] GameObject _close;
     [SerializeField] GameObject _open;
     GameObject _anim;
+    [SerializeField] GameObject _helpButton;
 
     private void Start()
     {
@@ -20,6 +21,11 @@ public class SceneMove : MonoBehaviour
     public void GameStart(string scneName)
     {
         StartCoroutine(GS(scneName));
+        if(_helpButton != null)
+        {
+            this.transform.position = new Vector2(-999f,-999f);
+            _helpButton.transform.position = new Vector2(-999f, -999f);
+        }
     }
     public void Title(string scneName)
     {
@@ -34,7 +40,7 @@ public class SceneMove : MonoBehaviour
     {
         var Anim = _anim.GetComponent<Animator>();
         Anim.Play("DoorOpen");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(scneName);
     }
 }
