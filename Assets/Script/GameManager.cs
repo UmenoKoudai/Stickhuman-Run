@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text _thisTimeDistance;
     [SerializeField] GameTime _gameTime = GameTime.Normal;
     [SerializeField] GameObject _result;
+    GameObject _effect;
     int _moveDistance;
     int _bestDistance;
     public int _moveSpeed;
@@ -28,15 +29,18 @@ public class GameManager : MonoBehaviour
     scoredata sco2 = new scoredata();
     void Start()
     {
+        _effect = GameObject.Find("Effct");
         sco2 = OnLoad();
         _bestDistance = sco2._score;
     }
 
+    [System.Obsolete]
     void Update()
     {
         _timer += Time.deltaTime;
         _count += Time.deltaTime;
         float time = 60 - _timer;
+        var Effct = _effect.GetComponent<ParticleSystem>();
         if (_gameTime == GameTime.Normal)
         {
             _timerText.text = $"TIME:{time.ToString("f2")}";
@@ -44,6 +48,7 @@ public class GameManager : MonoBehaviour
             _hiscoer.text = $"ƒxƒXƒg{_bestDistance.ToString("000")}m";
             if (_count >= 1)
             {
+                Effct.startSpeed += 1;
                 SpeedUp();
                 _count = 0;
                 _moveDistance += _moveSpeed;
