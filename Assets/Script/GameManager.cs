@@ -19,17 +19,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameTime _gameTime = GameTime.Normal;
     [SerializeField] GameObject _result;
     GameObject _effect;
+    /// <summary>一定時間でスピードアップ</summary>
+    int _speedUpCpunt = 1;
+    /// <summary>今回の移動距離</summary>
     int _moveDistance;
+    /// <summary>過去最高の移動距離</summary>
     int _bestDistance;
-    public int _moveSpeed;
+    /// <summary>プレートと背景の速度</summary>
+    public int _moveSpeed = 1;
+    /// <summary>プレイヤーがプレートに当たったら速度を元に戻す</summary>
     public bool _reset = false;
+    /// <summary>プレートと生成する間隔</summary>
     public float _intarval = 2f;
     float _timer;
     float _count;
+    /// <summary>過去最高の移動距離を保存するclass</summary>
     scoredata sco2 = new scoredata();
     void Start()
     {
-        _effect = GameObject.Find("Effct");
+        _effect = GameObject.Find("Effect");
         sco2 = OnLoad();
         _bestDistance = sco2._score;
     }
@@ -46,18 +54,17 @@ public class GameManager : MonoBehaviour
             _timerText.text = $"TIME:{time.ToString("f2")}";
             _distance.text = $"移動距離:{_moveDistance.ToString("000")}m";
             _hiscoer.text = $"ベスト{_bestDistance.ToString("000")}m";
-            if (_count >= 1)
+            if (_count >= _speedUpCpunt)
             {
-                Effct.startSpeed += 1;
                 SpeedUp();
-                _count = 0;
-                _moveDistance += _moveSpeed;
+                Effct.startSpeed += 1;
             }
             if (_reset)
             {
                 _moveSpeed = 1;
                 _intarval = 2f;
                 _reset = false;
+                Effct.startSpeed = 5;
             }
             if(_bestDistance <= _moveDistance)
             {  
@@ -86,6 +93,8 @@ public class GameManager : MonoBehaviour
     {
         _moveSpeed++;
         _intarval -= 0.07f;
+        _count = 0;
+        _moveDistance += _moveSpeed;
     }
 
     public void OnSave(scoredata sco)
