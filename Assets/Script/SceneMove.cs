@@ -39,7 +39,9 @@ public class SceneMove : MonoBehaviour
     IEnumerator GS(string scneName)
     {
         var Anim = _anim.GetComponent<Animator>();
+        var Audio = GetComponent<AudioSource>();
         Anim.Play("DoorOpen");
+        Audio.Play();
         yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(scneName);
     }

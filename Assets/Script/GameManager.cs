@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text _thisTimeDistance;
     [SerializeField] GameTime _gameTime = GameTime.Normal;
     [SerializeField] GameObject _result;
+    [SerializeField] GameObject _playerAudio;
     GameObject _effect;
     /// <summary>一定時間でスピードアップ</summary>
     int _speedUpCpunt = 1;
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _effect = GameObject.Find("Effect");
+        _playerAudio = GameObject.Find("Player");
         sco2 = OnLoad();
         _bestDistance = sco2._score;
     }
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour
         _count += Time.deltaTime;
         float time = 60 - _timer;
         var Effct = _effect.GetComponent<ParticleSystem>();
+        var Audio = _playerAudio.GetComponent<AudioSource>();
         if (_gameTime == GameTime.Normal)
         {
             _timerText.text = $"TIME:{time.ToString("f2")}";
@@ -58,6 +61,7 @@ public class GameManager : MonoBehaviour
             {
                 SpeedUp();
                 Effct.startSpeed += 1;
+                Audio.pitch += 0.01f;
             }
             if (_reset)
             {
@@ -65,6 +69,7 @@ public class GameManager : MonoBehaviour
                 _intarval = 2f;
                 _reset = false;
                 Effct.startSpeed = 5;
+                Audio.pitch = 0.7f;
             }
             if(_bestDistance <= _moveDistance)
             {  
