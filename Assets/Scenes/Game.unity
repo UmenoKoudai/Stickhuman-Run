@@ -559,6 +559,8 @@ MonoBehaviour:
   _gameTime: 0
   _result: {fileID: 1122849887}
   _playerAudio: {fileID: 0}
+  _acceleration: 1
+  _decline: 0.07
   _moveSpeed: 1
   _reset: 0
   _intarval: 2

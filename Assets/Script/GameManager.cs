@@ -12,13 +12,23 @@ public class GameManager : MonoBehaviour
         public int _score;
     }
 
+    /// <summary>制限時間表示</summary>
     [SerializeField] Text _timerText;
+    /// <summary>今回のスコア</summary>
     [SerializeField] Text _distance;
+    /// <summary>ベストスコア</summary>
     [SerializeField] Text _hiscoer;
+    /// <summary>ゲーム終了時のスコア</summary>
     [SerializeField] Text _thisTimeDistance;
+    /// <summary>ゲーム中かゲーム終了か</summary>
     [SerializeField] GameTime _gameTime = GameTime.Normal;
+    /// <summary>リザルト画面表示</summary>
     [SerializeField] GameObject _result;
+    /// <summary>RunAudio再生</summary>
     [SerializeField] GameObject _playerAudio;
+    [SerializeField] int _acceleration;
+    [SerializeField] float _decline;
+    /// <summary>風のエフェクト加速</summary>
     GameObject _effect;
     /// <summary>一定時間でスピードアップ</summary>
     int _speedUpCpunt = 1;
@@ -32,7 +42,9 @@ public class GameManager : MonoBehaviour
     public bool _reset = false;
     /// <summary>プレートと生成する間隔</summary>
     public float _intarval = 2f;
+    /// <summary>制限時間</summary>
     float _timer;
+    /// <summary>１秒間のカウント</summary>
     float _count;
     /// <summary>過去最高の移動距離を保存するclass</summary>
     scoredata sco2 = new scoredata();
@@ -96,8 +108,8 @@ public class GameManager : MonoBehaviour
     }
     void SpeedUp()
     {
-        _moveSpeed++;
-        _intarval -= 0.07f;
+        _moveSpeed += _acceleration;
+        _intarval -= _decline;
         _count = 0;
         _moveDistance += _moveSpeed;
     }
