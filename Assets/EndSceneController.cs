@@ -11,9 +11,9 @@ public class EndSceneController : MonoBehaviour
     [SerializeField] GameObject _nowScene;
     [SerializeField] GameObject _lastScene;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "GOAL")
+        if (collision.gameObject.tag == "Door")
         {
             _anim.Play("SceneOut");
         }
