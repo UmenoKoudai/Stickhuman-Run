@@ -10,6 +10,10 @@ public class EndSceneController : MonoBehaviour
     [SerializeField] Animator _anim;
     [SerializeField] GameObject _nowScene;
     [SerializeField] GameObject _lastScene;
+    [SerializeField] GameObject _doorClose;
+    [SerializeField] float _angleSpeed;
+    float _angle;
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -30,5 +34,9 @@ public class EndSceneController : MonoBehaviour
         //SceneManager.LoadScene(scnename);
         _nowScene.gameObject.SetActive(false);
         _lastScene.gameObject.SetActive(true);
+    }
+    public void MoveScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }

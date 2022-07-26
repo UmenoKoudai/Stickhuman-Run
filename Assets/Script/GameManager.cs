@@ -99,10 +99,16 @@ public class GameManager : MonoBehaviour
         }
         if(time <= 0)
         {
-            _thisTimeDistance.text = $"スコア{_moveDistance.ToString("000")}m";
-            _gameTime = GameTime.Time0;
-            _result.gameObject.SetActive(true);
-            
+            if(_moveDistance >= 1000)
+            {
+                SceneManager.LoadScene("TrueEnd");
+            }
+            else
+            {
+                _thisTimeDistance.text = $"スコア{_moveDistance.ToString("000")}m";
+                _gameTime = GameTime.Time0;
+                _result.gameObject.SetActive(true);
+            }
         }
         
     }
