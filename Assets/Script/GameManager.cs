@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     {
         public int _score;
     }
-
     /// <summary>制限時間表示</summary>
     [SerializeField] Text _timerText;
     /// <summary>今回のスコア</summary>

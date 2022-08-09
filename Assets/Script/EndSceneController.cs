@@ -12,6 +12,7 @@ public class EndSceneController : MonoBehaviour
     [SerializeField] GameObject _lastScene;
     [SerializeField] GameObject _doorClose;
     [SerializeField] float _angleSpeed;
+    [SerializeField] AudioSource _audio;
     float _angle;
     
 
@@ -20,6 +21,14 @@ public class EndSceneController : MonoBehaviour
         if (collision.gameObject.tag == "Door")
         {
             _anim.Play("SceneOut");
+            _audio.Stop();
+        }
+    }
+    public void AudioPlay()
+    {
+        if(_audio)
+        {
+            _audio.Play();
         }
     }
     public void AnimationPlay(string animname)
