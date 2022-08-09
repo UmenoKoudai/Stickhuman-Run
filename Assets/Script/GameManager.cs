@@ -145,7 +145,9 @@ public class GameManager : MonoBehaviour
         catch
         {
             Debug.LogWarning("ÉfÅ[É^Ç™Ç†ÇËÇ‹ÇπÇÒ");
-            return null;
+            sco2._score = 0;
+            OnSave(sco2);
+            return sco2 = OnLoad();
         }
 
     }
