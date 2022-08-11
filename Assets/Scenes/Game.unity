@@ -6766,7 +6766,7 @@ MonoBehaviour:
   _wallPosition:
   - {x: 10, y: -2, z: 0}
   - {x: 10, y: -4, z: 0}
-  _wall: {fileID: 5359394652573810142, guid: 5978b4e00c1b32643bb0597ea5ec4967, type: 3}
+  _wall: {fileID: 6041465477799598095, guid: 61000acb3732a0f4f851888165f67bc6, type: 3}
 --- !u!4 &1961957157
 Transform:
   m_ObjectHideFlags: 0
