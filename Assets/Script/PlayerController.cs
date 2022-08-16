@@ -35,22 +35,28 @@ public class PlayerController : MonoBehaviour
             DownMove();
             Debug.Log("‰º•ûŒü");
         }
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            _jumpAudio.Play();
+            _defaultAudio.Stop();
+        }
+        else if(Input.GetKeyDown(KeyCode.S))
+        {
+            _slidingAudio.Play();
+            _defaultAudio.Stop();
+        }
     }
     void UpMove()
     {
         _up.enabled = true;
         _default.enabled = false;
         _anim.Play("Jump");
-        _jumpAudio.Play();
-        _defaultAudio.Stop();
     }
     void DownMove()
     {
         _down.enabled = true;
         _default.enabled = false;
         _anim.Play("Sliding");
-        _slidingAudio.Play();
-        _defaultAudio.Stop();
     }
 }
 
