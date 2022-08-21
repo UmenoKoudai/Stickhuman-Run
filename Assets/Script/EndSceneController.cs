@@ -13,8 +13,22 @@ public class EndSceneController : MonoBehaviour
     [SerializeField] GameObject _doorClose;
     [SerializeField] float _angleSpeed;
     [SerializeField] AudioSource _audio;
+    [SerializeField] bool _playerMove;
+    [SerializeField] int _moveSpeed;
+    Rigidbody2D _rb;
     float _angle;
-    
+
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
+    private void Update()
+    {
+        if(_playerMove)
+        {
+            _rb.velocity = Vector2.right * _moveSpeed;
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

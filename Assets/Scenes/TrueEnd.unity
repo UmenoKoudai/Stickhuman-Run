@@ -285,7 +285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288349120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.126192, y: -0.5662286, z: -10.151807}
+  m_LocalPosition: {x: -0.48000002, y: -0.48000002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -398,6 +398,8 @@ MonoBehaviour:
   _doorClose: {fileID: 0}
   _angleSpeed: 0
   _audio: {fileID: 0}
+  _playerMove: 0
+  _moveSpeed: 0
 --- !u!1 &396757186
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,7 +670,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464211400}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.398982, y: 0.08622861, z: 0.15180698}
+  m_LocalPosition: {x: -8.398982, y: 0.08622861, z: 0.151807}
   m_LocalScale: {x: 0.542265, y: 0.542265, z: 0.542265}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -693,6 +695,8 @@ MonoBehaviour:
   _doorClose: {fileID: 0}
   _angleSpeed: 0
   _audio: {fileID: 464211407}
+  _playerMove: 1
+  _moveSpeed: 5
 --- !u!50 &464211405
 Rigidbody2D:
   serializedVersion: 4
@@ -731,7 +735,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 9.6, y: 12.8}
+    oldSize: {x: 3.307021, y: 4.6773334}
     newSize: {x: 9.6, y: 12.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1127,7 +1131,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825895009}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.80721, y: 3.4, z: -10}
+  m_LocalPosition: {x: -0.7989824, y: 3.4862287, z: -9.848193}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1376,6 +1380,8 @@ MonoBehaviour:
   _doorClose: {fileID: 0}
   _angleSpeed: 0
   _audio: {fileID: 851032254}
+  _playerMove: 0
+  _moveSpeed: 0
 --- !u!95 &851032253
 Animator:
   serializedVersion: 4
@@ -2613,7 +2619,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1831381236
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2699,6 +2705,8 @@ MonoBehaviour:
   _doorClose: {fileID: 0}
   _angleSpeed: 0
   _audio: {fileID: 464211407}
+  _playerMove: 0
+  _moveSpeed: 0
 --- !u!95 &1831381239
 Animator:
   serializedVersion: 4
@@ -2998,6 +3006,8 @@ MonoBehaviour:
   _doorClose: {fileID: 0}
   _angleSpeed: 0
   _audio: {fileID: 0}
+  _playerMove: 0
+  _moveSpeed: 0
 --- !u!1 &2122471809
 GameObject:
   m_ObjectHideFlags: 0
