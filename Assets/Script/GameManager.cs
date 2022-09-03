@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     {
         public int _score;
     }
-
     /// <summary>制限時間表示</summary>
     [SerializeField] Text _timerText;
     /// <summary>今回のスコア</summary>
@@ -145,7 +144,9 @@ public class GameManager : MonoBehaviour
         catch
         {
             Debug.LogWarning("データがありません");
-            return null;
+            sco2._score = 0;
+            OnSave(sco2);
+            return sco2 = OnLoad();
         }
 
     }
